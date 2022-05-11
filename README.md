@@ -32,3 +32,9 @@ Finally you may work with migration (from `WebApplication` folder). The followin
 ```
 dotnet ef migrations add InitialMigration
 ```
+
+Специально для Насти, используй эту команду:
+
+```
+git clone https://github.com/Greenprize/Server-v0.0.git <name of your folder>
+```

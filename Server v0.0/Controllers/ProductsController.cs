@@ -28,7 +28,7 @@ namespace Server_v0._0.Controllers
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Orders == null)
             {
                 return NotFound();
             }
@@ -71,7 +71,7 @@ namespace Server_v0._0.Controllers
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Orders == null)
             {
                 return NotFound();
             }
@@ -124,7 +124,7 @@ namespace Server_v0._0.Controllers
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Orders == null)
             {
                 return NotFound();
             }
@@ -145,15 +145,23 @@ namespace Server_v0._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (_context.Orders == null)
+            {
+                return Problem("Entity set 'ApplicationContext.Orders'  is null.");
+            }
             var product = await _context.Orders.FindAsync(id);
-            _context.Orders.Remove(product);
+            if (product != null)
+            {
+                _context.Orders.Remove(product);
+            }
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProductExists(int id)
         {
-            return _context.Orders.Any(e => e.ProductId == id);
+          return _context.Orders.Any(e => e.ProductId == id);
         }
     }
 }

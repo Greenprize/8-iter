@@ -21,13 +21,13 @@ namespace Server_v0._0.Controllers
         // GET: Discounts
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Discount.ToListAsync());
+              return View(await _context.Discount.ToListAsync());
         }
 
         // GET: Discounts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Discount == null)
             {
                 return NotFound();
             }
@@ -67,7 +67,7 @@ namespace Server_v0._0.Controllers
         // GET: Discounts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Discount == null)
             {
                 return NotFound();
             }
@@ -118,7 +118,7 @@ namespace Server_v0._0.Controllers
         // GET: Discounts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Discount == null)
             {
                 return NotFound();
             }
@@ -138,15 +138,23 @@ namespace Server_v0._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (_context.Discount == null)
+            {
+                return Problem("Entity set 'ApplicationContext.Discount'  is null.");
+            }
             var discount = await _context.Discount.FindAsync(id);
-            _context.Discount.Remove(discount);
+            if (discount != null)
+            {
+                _context.Discount.Remove(discount);
+            }
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool DiscountExists(int id)
         {
-            return _context.Discount.Any(e => e.DiscountId == id);
+          return _context.Discount.Any(e => e.DiscountId == id);
         }
     }
 }

@@ -21,13 +21,13 @@ namespace Server_v0._0.Controllers
         // GET: ProductTypes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Clients.ToListAsync());
+              return View(await _context.Clients.ToListAsync());
         }
 
         // GET: ProductTypes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Clients == null)
             {
                 return NotFound();
             }
@@ -67,7 +67,7 @@ namespace Server_v0._0.Controllers
         // GET: ProductTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Clients == null)
             {
                 return NotFound();
             }
@@ -118,7 +118,7 @@ namespace Server_v0._0.Controllers
         // GET: ProductTypes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Clients == null)
             {
                 return NotFound();
             }
@@ -138,15 +138,23 @@ namespace Server_v0._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (_context.Clients == null)
+            {
+                return Problem("Entity set 'ApplicationContext.Clients'  is null.");
+            }
             var productType = await _context.Clients.FindAsync(id);
-            _context.Clients.Remove(productType);
+            if (productType != null)
+            {
+                _context.Clients.Remove(productType);
+            }
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProductTypeExists(int id)
         {
-            return _context.Clients.Any(e => e.ProductTypeId == id);
+          return _context.Clients.Any(e => e.ProductTypeId == id);
         }
     }
 }

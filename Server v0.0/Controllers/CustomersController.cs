@@ -28,7 +28,7 @@ namespace Server_v0._0.Controllers
         // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Customer == null)
             {
                 return NotFound();
             }
@@ -71,7 +71,7 @@ namespace Server_v0._0.Controllers
         // GET: Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Customer == null)
             {
                 return NotFound();
             }
@@ -124,7 +124,7 @@ namespace Server_v0._0.Controllers
         // GET: Customers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Customer == null)
             {
                 return NotFound();
             }
@@ -145,15 +145,23 @@ namespace Server_v0._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (_context.Customer == null)
+            {
+                return Problem("Entity set 'ApplicationContext.Customer'  is null.");
+            }
             var customer = await _context.Customer.FindAsync(id);
-            _context.Customer.Remove(customer);
+            if (customer != null)
+            {
+                _context.Customer.Remove(customer);
+            }
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CustomerExists(int id)
         {
-            return _context.Customer.Any(e => e.CustomerId == id);
+          return _context.Customer.Any(e => e.CustomerId == id);
         }
     }
 }

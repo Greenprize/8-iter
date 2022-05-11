@@ -29,7 +29,7 @@ namespace Server_v0._0.Controllers
         // GET: ProductMaterials/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.ComputerOrders == null)
             {
                 return NotFound();
             }
@@ -59,7 +59,7 @@ namespace Server_v0._0.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductMaterialId,ProductId,MaterialId")] ProductMaterial productMaterial)
+        public async Task<IActionResult> Create([Bind("ProductMaterialId,Weight,ProductId,MaterialId")] ProductMaterial productMaterial)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +75,7 @@ namespace Server_v0._0.Controllers
         // GET: ProductMaterials/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.ComputerOrders == null)
             {
                 return NotFound();
             }
@@ -95,7 +95,7 @@ namespace Server_v0._0.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductMaterialId,ProductId,MaterialId")] ProductMaterial productMaterial)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductMaterialId,Weight,ProductId,MaterialId")] ProductMaterial productMaterial)
         {
             if (id != productMaterial.ProductMaterialId)
             {
@@ -130,7 +130,7 @@ namespace Server_v0._0.Controllers
         // GET: ProductMaterials/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.ComputerOrders == null)
             {
                 return NotFound();
             }
@@ -152,15 +152,23 @@ namespace Server_v0._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (_context.ComputerOrders == null)
+            {
+                return Problem("Entity set 'ApplicationContext.ComputerOrders'  is null.");
+            }
             var productMaterial = await _context.ComputerOrders.FindAsync(id);
-            _context.ComputerOrders.Remove(productMaterial);
+            if (productMaterial != null)
+            {
+                _context.ComputerOrders.Remove(productMaterial);
+            }
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProductMaterialExists(int id)
         {
-            return _context.ComputerOrders.Any(e => e.ProductMaterialId == id);
+          return _context.ComputerOrders.Any(e => e.ProductMaterialId == id);
         }
     }
 }

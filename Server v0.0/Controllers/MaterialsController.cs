@@ -21,13 +21,13 @@ namespace Server_v0._0.Controllers
         // GET: Materials
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Computers.ToListAsync());
+              return View(await _context.Computers.ToListAsync());
         }
 
         // GET: Materials/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Computers == null)
             {
                 return NotFound();
             }
@@ -67,7 +67,7 @@ namespace Server_v0._0.Controllers
         // GET: Materials/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Computers == null)
             {
                 return NotFound();
             }
@@ -118,7 +118,7 @@ namespace Server_v0._0.Controllers
         // GET: Materials/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Computers == null)
             {
                 return NotFound();
             }
@@ -138,15 +138,23 @@ namespace Server_v0._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (_context.Computers == null)
+            {
+                return Problem("Entity set 'ApplicationContext.Computers'  is null.");
+            }
             var material = await _context.Computers.FindAsync(id);
-            _context.Computers.Remove(material);
+            if (material != null)
+            {
+                _context.Computers.Remove(material);
+            }
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool MaterialExists(int id)
         {
-            return _context.Computers.Any(e => e.MaterialId == id);
+          return _context.Computers.Any(e => e.MaterialId == id);
         }
     }
 }
