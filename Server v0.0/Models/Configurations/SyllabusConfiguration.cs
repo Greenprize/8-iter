@@ -7,15 +7,15 @@ namespace Server_v0._0.Models
     {
         public void Configure(EntityTypeBuilder<Syllabus> builder)
         {
-            builder.HasKey(s => new {s.Syllabus_Id });
+            builder.HasKey(s => new {s.SyllabusId });
 
             builder.HasOne(ss => ss.Student)
                 .WithMany(s => s.Syllabuses)
-                .HasForeignKey(ss => ss.Id_Stud);
+                .HasForeignKey(ss => ss.StudId);
 
             builder.HasOne(ss => ss.Subject)
                 .WithMany(s => s.Syllabuses)
-                .HasForeignKey(ss => ss.Id_Subj);
+                .HasForeignKey(ss => ss.SubjectId);
         }
     }
 }

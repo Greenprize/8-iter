@@ -3,31 +3,22 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Server_v0._0.Models
 {
-    public class Time_ss
+    public class Time
     {
-        [Key]
-        public int ID_Time { get; set; }
-
-        [Required]
+        public int TimeId { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public string Time_Lecture { get; set; }
-
-        [Required]
+        public string LectureTime { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public string Time_Work { get; set; }
-
-        [Required]
+        public string WorkTime { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public string Time_Labor { get; set; }
-
-        public ICollection<Grads_Of_Semestr> Grads_Of_Semestrs { get; set; }
-
-        public int Id_Sem { get; set; }
+        public string LaborTime { get; set; }
+        public int SemestrId { get; set; }
         public Semestr Semestr { get; set; }
-        public int Id_Subj { get; set; }
+        public int SubjectId { get; set; }
         public Subject Subject { get; set; }
+        public ICollection<GradsOfSemestr> GradsOfSemestrs { get; set; }
     }
 }

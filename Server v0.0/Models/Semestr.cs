@@ -5,8 +5,7 @@ namespace Server_v0._0.Models
 {
     public class Semestr
     {
-        [Key]
-        public int Id_Sem { get; set; }
-        public List<Time_ss> Time_sss { get; set; }
+        public int SemestrId { get; set; }
+        public List<Time> Times { get; set; }
     }
 }

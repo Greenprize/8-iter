@@ -21,19 +21,19 @@ namespace Server_v0._0.Controllers
         // GET: Semestrs
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Semestrs.ToListAsync());
+              return View(await _context.Semestr.ToListAsync());
         }
 
         // GET: Semestrs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Semestrs == null)
+            if (id == null || _context.Semestr == null)
             {
                 return NotFound();
             }
 
-            var semestr = await _context.Semestrs
-                .FirstOrDefaultAsync(m => m.Id_Sem == id);
+            var semestr = await _context.Semestr
+                .FirstOrDefaultAsync(m => m.SemestrId == id);
             if (semestr == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace Server_v0._0.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id_Sem")] Semestr semestr)
+        public async Task<IActionResult> Create([Bind("SemestrId")] Semestr semestr)
         {
             if (ModelState.IsValid)
             {
@@ -67,12 +67,12 @@ namespace Server_v0._0.Controllers
         // GET: Semestrs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Semestrs == null)
+            if (id == null || _context.Semestr == null)
             {
                 return NotFound();
             }
 
-            var semestr = await _context.Semestrs.FindAsync(id);
+            var semestr = await _context.Semestr.FindAsync(id);
             if (semestr == null)
             {
                 return NotFound();
@@ -85,9 +85,9 @@ namespace Server_v0._0.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_Sem")] Semestr semestr)
+        public async Task<IActionResult> Edit(int id, [Bind("SemestrId")] Semestr semestr)
         {
-            if (id != semestr.Id_Sem)
+            if (id != semestr.SemestrId)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace Server_v0._0.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SemestrExists(semestr.Id_Sem))
+                    if (!SemestrExists(semestr.SemestrId))
                     {
                         return NotFound();
                     }
@@ -118,13 +118,13 @@ namespace Server_v0._0.Controllers
         // GET: Semestrs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Semestrs == null)
+            if (id == null || _context.Semestr == null)
             {
                 return NotFound();
             }
 
-            var semestr = await _context.Semestrs
-                .FirstOrDefaultAsync(m => m.Id_Sem == id);
+            var semestr = await _context.Semestr
+                .FirstOrDefaultAsync(m => m.SemestrId == id);
             if (semestr == null)
             {
                 return NotFound();
@@ -138,14 +138,14 @@ namespace Server_v0._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Semestrs == null)
+            if (_context.Semestr == null)
             {
-                return Problem("Entity set 'ApplicationContext.Semestrs'  is null.");
+                return Problem("Entity set 'ApplicationContext.Semestr'  is null.");
             }
-            var semestr = await _context.Semestrs.FindAsync(id);
+            var semestr = await _context.Semestr.FindAsync(id);
             if (semestr != null)
             {
-                _context.Semestrs.Remove(semestr);
+                _context.Semestr.Remove(semestr);
             }
             
             await _context.SaveChangesAsync();
@@ -154,7 +154,7 @@ namespace Server_v0._0.Controllers
 
         private bool SemestrExists(int id)
         {
-          return _context.Semestrs.Any(e => e.Id_Sem == id);
+          return _context.Semestr.Any(e => e.SemestrId == id);
         }
     }
 }

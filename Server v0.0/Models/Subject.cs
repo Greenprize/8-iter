@@ -1,14 +1,12 @@
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 
 namespace Server_v0._0.Models
 {
     public class Subject
     {
-        [Key]
-        public int Id_Subj { get; set; }
-        public ICollection<Syllabus> Syllabuses { get; set; }
+        public int SubjectId { get; set; }
         public string Title { get; set; }
-        public ICollection<Time_ss> Time_ss { get; set; }
+        public List<Time> Times { get; set; }
+        public ICollection<Syllabus> Syllabuses { get; set; }
     }
 }

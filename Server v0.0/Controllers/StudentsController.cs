@@ -21,19 +21,19 @@ namespace Server_v0._0.Controllers
         // GET: Students
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Students.ToListAsync());
+              return View(await _context.Student.ToListAsync());
         }
 
         // GET: Students/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Students == null)
+            if (id == null || _context.Student == null)
             {
                 return NotFound();
             }
 
-            var student = await _context.Students
-                .FirstOrDefaultAsync(m => m.Id_Stud == id);
+            var student = await _context.Student
+                .FirstOrDefaultAsync(m => m.StudentId == id);
             if (student == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace Server_v0._0.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id_Stud,Surname,Name,Patronomic,Phone,Addres")] Student student)
+        public async Task<IActionResult> Create([Bind("StudentId,Surname,Name,Patronomic,Phone,Addres")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -67,12 +67,12 @@ namespace Server_v0._0.Controllers
         // GET: Students/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Students == null)
+            if (id == null || _context.Student == null)
             {
                 return NotFound();
             }
 
-            var student = await _context.Students.FindAsync(id);
+            var student = await _context.Student.FindAsync(id);
             if (student == null)
             {
                 return NotFound();
@@ -85,9 +85,9 @@ namespace Server_v0._0.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_Stud,Surname,Name,Patronomic,Phone,Addres")] Student student)
+        public async Task<IActionResult> Edit(int id, [Bind("StudentId,Surname,Name,Patronomic,Phone,Addres")] Student student)
         {
-            if (id != student.Id_Stud)
+            if (id != student.StudentId)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace Server_v0._0.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StudentExists(student.Id_Stud))
+                    if (!StudentExists(student.StudentId))
                     {
                         return NotFound();
                     }
@@ -118,13 +118,13 @@ namespace Server_v0._0.Controllers
         // GET: Students/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Students == null)
+            if (id == null || _context.Student == null)
             {
                 return NotFound();
             }
 
-            var student = await _context.Students
-                .FirstOrDefaultAsync(m => m.Id_Stud == id);
+            var student = await _context.Student
+                .FirstOrDefaultAsync(m => m.StudentId == id);
             if (student == null)
             {
                 return NotFound();
@@ -138,14 +138,14 @@ namespace Server_v0._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Students == null)
+            if (_context.Student == null)
             {
-                return Problem("Entity set 'ApplicationContext.Students'  is null.");
+                return Problem("Entity set 'ApplicationContext.Student'  is null.");
             }
-            var student = await _context.Students.FindAsync(id);
+            var student = await _context.Student.FindAsync(id);
             if (student != null)
             {
-                _context.Students.Remove(student);
+                _context.Student.Remove(student);
             }
             
             await _context.SaveChangesAsync();
@@ -154,7 +154,7 @@ namespace Server_v0._0.Controllers
 
         private bool StudentExists(int id)
         {
-          return _context.Students.Any(e => e.Id_Stud == id);
+          return _context.Student.Any(e => e.StudentId == id);
         }
     }
 }

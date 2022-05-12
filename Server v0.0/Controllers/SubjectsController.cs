@@ -21,19 +21,19 @@ namespace Server_v0._0.Controllers
         // GET: Subjects
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Subjects.ToListAsync());
+              return View(await _context.Subject.ToListAsync());
         }
 
         // GET: Subjects/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Subjects == null)
+            if (id == null || _context.Subject == null)
             {
                 return NotFound();
             }
 
-            var subject = await _context.Subjects
-                .FirstOrDefaultAsync(m => m.Id_Subj == id);
+            var subject = await _context.Subject
+                .FirstOrDefaultAsync(m => m.SubjectId == id);
             if (subject == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace Server_v0._0.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id_Subj,Title")] Subject subject)
+        public async Task<IActionResult> Create([Bind("SubjectId,Title")] Subject subject)
         {
             if (ModelState.IsValid)
             {
@@ -67,12 +67,12 @@ namespace Server_v0._0.Controllers
         // GET: Subjects/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Subjects == null)
+            if (id == null || _context.Subject == null)
             {
                 return NotFound();
             }
 
-            var subject = await _context.Subjects.FindAsync(id);
+            var subject = await _context.Subject.FindAsync(id);
             if (subject == null)
             {
                 return NotFound();
@@ -85,9 +85,9 @@ namespace Server_v0._0.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_Subj,Title")] Subject subject)
+        public async Task<IActionResult> Edit(int id, [Bind("SubjectId,Title")] Subject subject)
         {
-            if (id != subject.Id_Subj)
+            if (id != subject.SubjectId)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace Server_v0._0.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SubjectExists(subject.Id_Subj))
+                    if (!SubjectExists(subject.SubjectId))
                     {
                         return NotFound();
                     }
@@ -118,13 +118,13 @@ namespace Server_v0._0.Controllers
         // GET: Subjects/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Subjects == null)
+            if (id == null || _context.Subject == null)
             {
                 return NotFound();
             }
 
-            var subject = await _context.Subjects
-                .FirstOrDefaultAsync(m => m.Id_Subj == id);
+            var subject = await _context.Subject
+                .FirstOrDefaultAsync(m => m.SubjectId == id);
             if (subject == null)
             {
                 return NotFound();
@@ -138,14 +138,14 @@ namespace Server_v0._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Subjects == null)
+            if (_context.Subject == null)
             {
-                return Problem("Entity set 'ApplicationContext.Subjects'  is null.");
+                return Problem("Entity set 'ApplicationContext.Subject'  is null.");
             }
-            var subject = await _context.Subjects.FindAsync(id);
+            var subject = await _context.Subject.FindAsync(id);
             if (subject != null)
             {
-                _context.Subjects.Remove(subject);
+                _context.Subject.Remove(subject);
             }
             
             await _context.SaveChangesAsync();
@@ -154,7 +154,7 @@ namespace Server_v0._0.Controllers
 
         private bool SubjectExists(int id)
         {
-          return _context.Subjects.Any(e => e.Id_Subj == id);
+          return _context.Subject.Any(e => e.SubjectId == id);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Server_v0._0.Grads_Of_Semestr>
+﻿@model IEnumerable<Server_v0._0.Models.GradsOfSemestr>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,10 +16,10 @@
                 @Html.DisplayNameFor(model => model.Grade)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Time_ss)
+                @Html.DisplayNameFor(model => model.Student)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Student)
+                @Html.DisplayNameFor(model => model.Time)
             </th>
             <th></th>
         </tr>
@@ -31,15 +31,15 @@
                 @Html.DisplayFor(modelItem => item.Grade)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Time_ss.Time_Labor)
+                @Html.DisplayFor(modelItem => item.Student.StudentId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Student.Id_Stud)
+                @Html.DisplayFor(modelItem => item.Time.TimeId)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Grads_Of_Semestr_Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Grads_Of_Semestr_Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Grads_Of_Semestr_Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.GradsOfSemestrId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.GradsOfSemestrId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.GradsOfSemestrId">Delete</a>
             </td>
         </tr>
 }

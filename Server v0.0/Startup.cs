@@ -51,16 +51,16 @@ namespace Server_v0._0
                     pattern: "{controller=Semestrs}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "MyArea",
-                    pattern: "{area:exists}/{controller=Time_ss}/{action=Index}/{id?}");
+                    pattern: "{area:exists}/{controller=Times}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "MyArea",
                     pattern: "{controller=Students}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "MyArea",
-                    pattern: "{controller=Grads_Of_Semestr}/{action=Index}/{id?}");
+                    pattern: "{controller=GradsOfSemestrs}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "MyArea",
-                    pattern: "{controller=Syllabus}/{action=Index}/{id?}");
+                    pattern: "{controller=Syllabuses}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "MyArea",
                     pattern: "{controller=Subjects}/{action=Index}/{id?}");
