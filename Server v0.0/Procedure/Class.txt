@@ -1,0 +1,7 @@
+﻿﻿﻿create procedure NotTime
+as
+begin
+SELECT Subjects.TITLE from Subjects join Time
+on Subjects.SubjectId = Time.SubjectId
+WHERE LectureTime > 17
+end

@@ -48,7 +48,7 @@ namespace Server_v0._0.Controllers
         // GET: GradsOfSemestrs/Create
         public IActionResult Create()
         {
-            ViewData["StudId"] = new SelectList(_context.Set<Student>(), "StudentId", "StudentId");
+            ViewData["StudId"] = new SelectList(_context.Student, "StudentId", "StudentId");
             ViewData["TimeId"] = new SelectList(_context.Time, "TimeId", "TimeId");
             return View();
         }
@@ -66,7 +66,7 @@ namespace Server_v0._0.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudId"] = new SelectList(_context.Set<Student>(), "StudentId", "StudentId", gradsOfSemestr.StudId);
+            ViewData["StudId"] = new SelectList(_context.Student, "StudentId", "StudentId", gradsOfSemestr.StudId);
             ViewData["TimeId"] = new SelectList(_context.Time, "TimeId", "TimeId", gradsOfSemestr.TimeId);
             return View(gradsOfSemestr);
         }
@@ -84,7 +84,7 @@ namespace Server_v0._0.Controllers
             {
                 return NotFound();
             }
-            ViewData["StudId"] = new SelectList(_context.Set<Student>(), "StudentId", "StudentId", gradsOfSemestr.StudId);
+            ViewData["StudId"] = new SelectList(_context.Student, "StudentId", "StudentId", gradsOfSemestr.StudId);
             ViewData["TimeId"] = new SelectList(_context.Time, "TimeId", "TimeId", gradsOfSemestr.TimeId);
             return View(gradsOfSemestr);
         }
@@ -121,7 +121,7 @@ namespace Server_v0._0.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudId"] = new SelectList(_context.Set<Student>(), "StudentId", "StudentId", gradsOfSemestr.StudId);
+            ViewData["StudId"] = new SelectList(_context.Student, "StudentId", "StudentId", gradsOfSemestr.StudId);
             ViewData["TimeId"] = new SelectList(_context.Time, "TimeId", "TimeId", gradsOfSemestr.TimeId);
             return View(gradsOfSemestr);
         }

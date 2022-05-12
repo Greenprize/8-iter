@@ -49,7 +49,7 @@ namespace Server_v0._0.Controllers
         public IActionResult Create()
         {
             ViewData["SemestrId"] = new SelectList(_context.Semestr, "SemestrId", "SemestrId");
-            ViewData["SubjectId"] = new SelectList(_context.Set<Subject>(), "SubjectId", "SubjectId");
+            ViewData["SubjectId"] = new SelectList(_context.Subject, "SubjectId", "SubjectId");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace Server_v0._0.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["SemestrId"] = new SelectList(_context.Semestr, "SemestrId", "SemestrId", time.SemestrId);
-            ViewData["SubjectId"] = new SelectList(_context.Set<Subject>(), "SubjectId", "SubjectId", time.SubjectId);
+            ViewData["SubjectId"] = new SelectList(_context.Subject, "SubjectId", "SubjectId", time.SubjectId);
             return View(time);
         }
 
@@ -85,7 +85,7 @@ namespace Server_v0._0.Controllers
                 return NotFound();
             }
             ViewData["SemestrId"] = new SelectList(_context.Semestr, "SemestrId", "SemestrId", time.SemestrId);
-            ViewData["SubjectId"] = new SelectList(_context.Set<Subject>(), "SubjectId", "SubjectId", time.SubjectId);
+            ViewData["SubjectId"] = new SelectList(_context.Subject, "SubjectId", "SubjectId", time.SubjectId);
             return View(time);
         }
 
@@ -122,7 +122,7 @@ namespace Server_v0._0.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["SemestrId"] = new SelectList(_context.Semestr, "SemestrId", "SemestrId", time.SemestrId);
-            ViewData["SubjectId"] = new SelectList(_context.Set<Subject>(), "SubjectId", "SubjectId", time.SubjectId);
+            ViewData["SubjectId"] = new SelectList(_context.Subject, "SubjectId", "SubjectId", time.SubjectId);
             return View(time);
         }
 
