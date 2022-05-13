@@ -21,19 +21,19 @@ namespace Server_v0._0.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var applicationContext = _context.Orders.Include(p => p.ProductType);
+            var applicationContext = _context.Product.Include(p => p.ProductType);
             return View(await applicationContext.ToListAsync());
         }
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Orders == null)
+            if (id == null || _context.Product == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Orders
+            var product = await _context.Product
                 .Include(p => p.ProductType)
                 .FirstOrDefaultAsync(m => m.ProductId == id);
             if (product == null)
@@ -47,7 +47,7 @@ namespace Server_v0._0.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["ProductTypeId"] = new SelectList(_context.Clients, "ProductTypeId", "Type");
+            ViewData["ProductTypeId"] = new SelectList(_context.Set<ProductType>(), "ProductTypeId", "Type");
             return View();
         }
 
@@ -64,24 +64,24 @@ namespace Server_v0._0.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProductTypeId"] = new SelectList(_context.Clients, "ProductTypeId", "Type", product.ProductTypeId);
+            ViewData["ProductTypeId"] = new SelectList(_context.Set<ProductType>(), "ProductTypeId", "Type", product.ProductTypeId);
             return View(product);
         }
 
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Orders == null)
+            if (id == null || _context.Product == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Orders.FindAsync(id);
+            var product = await _context.Product.FindAsync(id);
             if (product == null)
             {
                 return NotFound();
             }
-            ViewData["ProductTypeId"] = new SelectList(_context.Clients, "ProductTypeId", "Type", product.ProductTypeId);
+            ViewData["ProductTypeId"] = new SelectList(_context.Set<ProductType>(), "ProductTypeId", "Type", product.ProductTypeId);
             return View(product);
         }
 
@@ -117,19 +117,19 @@ namespace Server_v0._0.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProductTypeId"] = new SelectList(_context.Clients, "ProductTypeId", "Type", product.ProductTypeId);
+            ViewData["ProductTypeId"] = new SelectList(_context.Set<ProductType>(), "ProductTypeId", "Type", product.ProductTypeId);
             return View(product);
         }
 
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Orders == null)
+            if (id == null || _context.Product == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Orders
+            var product = await _context.Product
                 .Include(p => p.ProductType)
                 .FirstOrDefaultAsync(m => m.ProductId == id);
             if (product == null)
@@ -145,14 +145,14 @@ namespace Server_v0._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Orders == null)
+            if (_context.Product == null)
             {
-                return Problem("Entity set 'ApplicationContext.Orders'  is null.");
+                return Problem("Entity set 'ApplicationContext.Product'  is null.");
             }
-            var product = await _context.Orders.FindAsync(id);
+            var product = await _context.Product.FindAsync(id);
             if (product != null)
             {
-                _context.Orders.Remove(product);
+                _context.Product.Remove(product);
             }
             
             await _context.SaveChangesAsync();
@@ -161,7 +161,7 @@ namespace Server_v0._0.Controllers
 
         private bool ProductExists(int id)
         {
-          return _context.Orders.Any(e => e.ProductId == id);
+          return _context.Product.Any(e => e.ProductId == id);
         }
     }
 }

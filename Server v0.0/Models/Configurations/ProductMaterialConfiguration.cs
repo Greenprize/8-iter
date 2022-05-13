@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Server_v0._0.Models
 {
-    public class ComputerOrderConfiguration : IEntityTypeConfiguration<ProductMaterial>
+    public class ProductMaterialConfiguration : IEntityTypeConfiguration<ProductMaterial>
     {
         public void Configure(EntityTypeBuilder<ProductMaterial> builder)
         {

@@ -1,0 +1,19 @@
+﻿create trigger set_discount
+on Sale
+for insert
+as
+declare @Customer as int, @C as int
+select @Customer = CustomerId from inserted
+select @C = count(SaleId) from Sale where CustomerId = @Customer
+if @C = 2
+update Customer
+set DiscountId = 2 where CustomerId = @Customer
+if @C = 5
+update Customer
+set DiscountId = 5 where CustomerId = @Customer
+if @C = 8
+update Customer
+set DiscountId = 8 where CustomerId = @Customer
+if @C = 500
+update Customer
+set DiscountId = 11 where CustomerId = @Customer

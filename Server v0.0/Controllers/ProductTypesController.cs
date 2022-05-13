@@ -21,18 +21,18 @@ namespace Server_v0._0.Controllers
         // GET: ProductTypes
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Clients.ToListAsync());
+              return View(await _context.ProductType.ToListAsync());
         }
 
         // GET: ProductTypes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Clients == null)
+            if (id == null || _context.ProductType == null)
             {
                 return NotFound();
             }
 
-            var productType = await _context.Clients
+            var productType = await _context.ProductType
                 .FirstOrDefaultAsync(m => m.ProductTypeId == id);
             if (productType == null)
             {
@@ -67,12 +67,12 @@ namespace Server_v0._0.Controllers
         // GET: ProductTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Clients == null)
+            if (id == null || _context.ProductType == null)
             {
                 return NotFound();
             }
 
-            var productType = await _context.Clients.FindAsync(id);
+            var productType = await _context.ProductType.FindAsync(id);
             if (productType == null)
             {
                 return NotFound();
@@ -118,12 +118,12 @@ namespace Server_v0._0.Controllers
         // GET: ProductTypes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Clients == null)
+            if (id == null || _context.ProductType == null)
             {
                 return NotFound();
             }
 
-            var productType = await _context.Clients
+            var productType = await _context.ProductType
                 .FirstOrDefaultAsync(m => m.ProductTypeId == id);
             if (productType == null)
             {
@@ -138,14 +138,14 @@ namespace Server_v0._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Clients == null)
+            if (_context.ProductType == null)
             {
-                return Problem("Entity set 'ApplicationContext.Clients'  is null.");
+                return Problem("Entity set 'ApplicationContext.ProductType'  is null.");
             }
-            var productType = await _context.Clients.FindAsync(id);
+            var productType = await _context.ProductType.FindAsync(id);
             if (productType != null)
             {
-                _context.Clients.Remove(productType);
+                _context.ProductType.Remove(productType);
             }
             
             await _context.SaveChangesAsync();
@@ -154,7 +154,7 @@ namespace Server_v0._0.Controllers
 
         private bool ProductTypeExists(int id)
         {
-          return _context.Clients.Any(e => e.ProductTypeId == id);
+          return _context.ProductType.Any(e => e.ProductTypeId == id);
         }
     }
 }

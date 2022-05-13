@@ -1,0 +1,7 @@
+﻿﻿create procedure change_price
+@K int
+as
+begin
+update Material
+set PricePerGram=convert(decimal(30, 0),PricePerGram*(@K))
+end

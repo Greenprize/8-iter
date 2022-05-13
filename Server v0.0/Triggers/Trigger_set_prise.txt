@@ -1,0 +1,10 @@
+﻿create trigger set_price
+on ProductMaterial
+for insert, update
+as
+update Product
+set Price = (select sum(PricePerGram*ProductMaterial.Weight)*1.5
+from Material join ProductMaterial on 
+Material.MaterialId = ProductMaterial.MaterialId
+where ProductId = (select ProductId from inserted) and Material.MaterialId = (select MaterialId from inserted))
+where ProductId = (select ProductId from inserted)

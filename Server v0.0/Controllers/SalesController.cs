@@ -49,7 +49,7 @@ namespace Server_v0._0.Controllers
         public IActionResult Create()
         {
             ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "FullName");
-            ViewData["ProductId"] = new SelectList(_context.Orders, "ProductId", "ProductId");
+            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "ProductId");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace Server_v0._0.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "FullName", sale.CustomerId);
-            ViewData["ProductId"] = new SelectList(_context.Orders, "ProductId", "ProductId", sale.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "ProductId", sale.ProductId);
             return View(sale);
         }
 
@@ -85,7 +85,7 @@ namespace Server_v0._0.Controllers
                 return NotFound();
             }
             ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "FullName", sale.CustomerId);
-            ViewData["ProductId"] = new SelectList(_context.Orders, "ProductId", "ProductId", sale.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "ProductId", sale.ProductId);
             return View(sale);
         }
 
@@ -122,7 +122,7 @@ namespace Server_v0._0.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "FullName", sale.CustomerId);
-            ViewData["ProductId"] = new SelectList(_context.Orders, "ProductId", "ProductId", sale.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "ProductId", sale.ProductId);
             return View(sale);
         }
 

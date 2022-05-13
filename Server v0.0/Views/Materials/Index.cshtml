@@ -7,6 +7,20 @@
 <h1>Index</h1>
 
 <p>
+    <form asp-action="ChangePrice" method="post">
+        <div style="display: flex;align-items: center;text-align: center; margin: 0">
+            <a style="display: flex;align-items: center;text-align: center;padding:3px" class="form-group">
+                <label style="padding-right:10px; margin: 0 " class="control-label">Koef</label>
+                <input style="max-width:150px" name="percent" class="form-control" />
+            </a>
+            <a class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </a>
+        </div>
+    </form>
+</p>
+
+<p>
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">

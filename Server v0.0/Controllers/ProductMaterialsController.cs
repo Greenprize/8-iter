@@ -22,19 +22,19 @@ namespace Server_v0._0.Controllers
         // GET: ProductMaterials
         public async Task<IActionResult> Index()
         {
-            var applicationContext = _context.ComputerOrders.Include(p => p.Material).Include(p => p.Product);
+            var applicationContext = _context.ProductMaterial.Include(p => p.Material).Include(p => p.Product);
             return View(await applicationContext.ToListAsync());
         }
 
         // GET: ProductMaterials/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.ComputerOrders == null)
+            if (id == null || _context.ProductMaterial == null)
             {
                 return NotFound();
             }
 
-            var productMaterial = await _context.ComputerOrders
+            var productMaterial = await _context.ProductMaterial
                 .Include(p => p.Material)
                 .Include(p => p.Product)
                 .FirstOrDefaultAsync(m => m.ProductMaterialId == id);
@@ -49,8 +49,8 @@ namespace Server_v0._0.Controllers
         // GET: ProductMaterials/Create
         public IActionResult Create()
         {
-            ViewData["MaterialId"] = new SelectList(_context.Computers, "MaterialId", "MaterialId");
-            ViewData["ProductId"] = new SelectList(_context.Orders, "ProductId", "ProductId");
+            ViewData["MaterialId"] = new SelectList(_context.Material, "MaterialId", "MaterialId");
+            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "ProductId");
             return View();
         }
 
@@ -67,26 +67,26 @@ namespace Server_v0._0.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaterialId"] = new SelectList(_context.Computers, "MaterialId", "MaterialId", productMaterial.MaterialId);
-            ViewData["ProductId"] = new SelectList(_context.Orders, "ProductId", "ProductId", productMaterial.ProductId);
+            ViewData["MaterialId"] = new SelectList(_context.Material, "MaterialId", "MaterialId", productMaterial.MaterialId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "ProductId", productMaterial.ProductId);
             return View(productMaterial);
         }
 
         // GET: ProductMaterials/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.ComputerOrders == null)
+            if (id == null || _context.ProductMaterial == null)
             {
                 return NotFound();
             }
 
-            var productMaterial = await _context.ComputerOrders.FindAsync(id);
+            var productMaterial = await _context.ProductMaterial.FindAsync(id);
             if (productMaterial == null)
             {
                 return NotFound();
             }
-            ViewData["MaterialId"] = new SelectList(_context.Computers, "MaterialId", "MaterialId", productMaterial.MaterialId);
-            ViewData["ProductId"] = new SelectList(_context.Orders, "ProductId", "ProductId", productMaterial.ProductId);
+            ViewData["MaterialId"] = new SelectList(_context.Material, "MaterialId", "MaterialId", productMaterial.MaterialId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "ProductId", productMaterial.ProductId);
             return View(productMaterial);
         }
 
@@ -122,20 +122,20 @@ namespace Server_v0._0.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaterialId"] = new SelectList(_context.Computers, "MaterialId", "MaterialId", productMaterial.MaterialId);
-            ViewData["ProductId"] = new SelectList(_context.Orders, "ProductId", "ProductId", productMaterial.ProductId);
+            ViewData["MaterialId"] = new SelectList(_context.Material, "MaterialId", "MaterialId", productMaterial.MaterialId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "ProductId", productMaterial.ProductId);
             return View(productMaterial);
         }
 
         // GET: ProductMaterials/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.ComputerOrders == null)
+            if (id == null || _context.ProductMaterial == null)
             {
                 return NotFound();
             }
 
-            var productMaterial = await _context.ComputerOrders
+            var productMaterial = await _context.ProductMaterial
                 .Include(p => p.Material)
                 .Include(p => p.Product)
                 .FirstOrDefaultAsync(m => m.ProductMaterialId == id);
@@ -152,14 +152,14 @@ namespace Server_v0._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.ComputerOrders == null)
+            if (_context.ProductMaterial == null)
             {
-                return Problem("Entity set 'ApplicationContext.ComputerOrders'  is null.");
+                return Problem("Entity set 'ApplicationContext.ProductMaterial'  is null.");
             }
-            var productMaterial = await _context.ComputerOrders.FindAsync(id);
+            var productMaterial = await _context.ProductMaterial.FindAsync(id);
             if (productMaterial != null)
             {
-                _context.ComputerOrders.Remove(productMaterial);
+                _context.ProductMaterial.Remove(productMaterial);
             }
             
             await _context.SaveChangesAsync();
@@ -168,7 +168,7 @@ namespace Server_v0._0.Controllers
 
         private bool ProductMaterialExists(int id)
         {
-          return _context.ComputerOrders.Any(e => e.ProductMaterialId == id);
+          return _context.ProductMaterial.Any(e => e.ProductMaterialId == id);
         }
     }
 }
