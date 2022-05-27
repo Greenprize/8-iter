@@ -48,22 +48,22 @@ namespace Server_v0._0
                 //endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Semestrs}/{action=Index}/{id?}");
+                    pattern: "{controller=Units}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "MyArea",
-                    pattern: "{area:exists}/{controller=Times}/{action=Index}/{id?}");
+                    pattern: "{area:exists}/{controller=Products}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "MyArea",
-                    pattern: "{controller=Students}/{action=Index}/{id?}");
+                    pattern: "{controller=Discounts}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "MyArea",
-                    pattern: "{controller=GradsOfSemestrs}/{action=Index}/{id?}");
+                    pattern: "{controller=Clients}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "MyArea",
-                    pattern: "{controller=Syllabuses}/{action=Index}/{id?}");
+                    pattern: "{controller=Sales}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "MyArea",
-                    pattern: "{controller=Subjects}/{action=Index}/{id?}");
+                    pattern: "{controller=OrderComponents}/{action=Index}/{id?}");
             });
         }
     }
