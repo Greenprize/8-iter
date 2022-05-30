@@ -13,5 +13,7 @@ namespace Server_v0._0.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public string SaleDate { get; set; }
         public ICollection<OrderComponent> OrderComponents { get; set; }
+        public int ClientId { get; set; }
+        public Client Client { get; set; }
     }
 }

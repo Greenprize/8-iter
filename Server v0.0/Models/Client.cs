@@ -14,5 +14,6 @@ namespace Server_v0._0.Models
         public string Email { get; set; }
         public int DiscountId {get;set;}
         public Discount Discount { get; set; }
+        public List<Sale> Sales { get; set; }
     }
 }

@@ -14,6 +14,9 @@ namespace Server_v0._0.Models
             modelBuilder.Entity<Client>()
                         .HasOne(p => p.Discount)
                         .WithMany(p => p.Clients);
+            modelBuilder.Entity<Sale>()
+                        .HasOne(p => p.Client)
+                        .WithMany(p => p.Sales);
         }
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
